@@ -1,5 +1,5 @@
 Simple Python Sensor Library
-----------------------------
+============================
 
 This is a small and simple library to collect data using Sensirion sensors with
 Python. Currently the following sensor chips are supported:

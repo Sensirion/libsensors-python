@@ -28,6 +28,16 @@ class Sensor(object):
         """
         raise NotImplementedError
 
+    def is_available(self):
+        """
+        :returns true if the sensor is plugged in and ready to measure
+        """
+        try:
+            self.get_values()
+            return True
+        except Exception:
+            return False
+
     def get_number_of_values(self):
         return len(self._units)
 
@@ -89,7 +99,8 @@ def find_sensors_by_type(sensor_type):
     address, bus, sensor_class = sensor_details[sensor_type]
     pattern = path_template.format(bus, address)
     paths = glob.glob(pattern)
-    return [sensor_class(p) for p in paths]
+    loaded_sensors = [sensor_class(p) for p in paths]
+    return [s for s in loaded_sensors if s.is_available()]
 
 
 def find_sensor_by_type(sensor_type):

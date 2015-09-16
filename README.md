@@ -1,3 +1,19 @@
+Welcome Hackathon Participants!
+===============================
+
+On this page we will collect information relevant to the Breath Hackathon currently gonig on
+at Technion in Haifa, Imperial College in London and MIT in Cambridge. Here we will address
+any issues that were brought to attention or additional examples that were requested.
+
+Contact / Support
+-----------------
+
+Should you have any questions regarding this library or any other component of the Raspberry
+Pi that was provided for the hackathon, feel free to contact us through the [GitHub issue
+tracker](https://github.com/Sensirion/libsensors-python/issues). During the event, we will
+monitor the incoming issues closely.
+
+
 Simple Python Sensor Library
 ============================
 
@@ -44,6 +60,9 @@ The library comes with three examples that show different ways to use the librar
             "values": [ 24.35, 53.21 ],
             "units": [ "°C", "%" ]
         }
+
+    The Raspberry Pi you received for the hackathon comes with a preconfigured instance
+    of the Mosquitto MQTT broker. There is no setup needed to run this example.
 
 4.  streaming_client.py and streaming_plot_client.py
 

@@ -44,6 +44,7 @@ class PlotWindow(QtGui.QMainWindow):
         self._plots = {}
         # Create the GUI refresh timer
         self._mqtt_client = mqtt_client
+        self._first_timestamp = None
         self.setup_ui()
 
     def next_color(self):
@@ -72,8 +73,10 @@ class PlotWindow(QtGui.QMainWindow):
         sensor = message.topic.split('/')[-2]
         if not sensor in self._plots:
             self.add_plot(sensor, payload['units'])
+        if not self._first_timestamp:
+            self._first_timestamp = payload['timestamp']
         plot = self._plots[sensor]
-        plot.time.append(payload['timestamp'])
+        plot.time.append(payload['timestamp'] - self._first_timestamp)
         for i, value in enumerate(payload['values']):
             plot.data[i].append(value)
             plot.curves[i].setData(list(plot.time), list(plot.data[i]))

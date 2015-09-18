@@ -44,7 +44,7 @@ class PlotWindow(QtGui.QMainWindow):
         self._plots = {}
         # Create the GUI refresh timer
         self._mqtt_client = mqtt_client
-        self.setupUi()
+        self.setup_ui()
 
     def next_color(self):
         self.color_index += 1
@@ -52,7 +52,7 @@ class PlotWindow(QtGui.QMainWindow):
             self.color_index = 0
         return self.colors[self.color_index]
 
-    def setupUi(self):
+    def setup_ui(self):
         self.setObjectName("MainWindow")
         self.resize(800, 600)
         self.setWindowTitle('Sensirion Plot')
@@ -65,9 +65,9 @@ class PlotWindow(QtGui.QMainWindow):
         self._mqtt_client.on_connect = self.on_connect
         # we need the signal so the event is processed on the GUI thread
         self._mqtt_client.on_message = lambda c, d, msg: self.client_message.emit(msg)
-        self.client_message.connect(self.onClientMessage)
+        self.client_message.connect(self.on_client_message)
 
-    def onClientMessage(self, message):
+    def on_client_message(self, message):
         payload = json.loads(message.payload)
         sensor = message.topic.split('/')[-2]
         if not sensor in self._plots:

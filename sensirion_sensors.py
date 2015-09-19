@@ -99,7 +99,12 @@ def find_sensors_by_type(sensor_type):
     address, bus, sensor_class = sensor_details[sensor_type]
     pattern = path_template.format(bus, address)
     paths = glob.glob(pattern)
-    loaded_sensors = [sensor_class(p) for p in paths]
+    loaded_sensors = []
+    for p in paths:
+        try:
+            loaded_sensors.append(sensor_class(p))
+        except Exception:
+            pass
     return [s for s in loaded_sensors if s.is_available()]
 
 

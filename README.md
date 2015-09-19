@@ -5,6 +5,20 @@ On this page we will collect information relevant to the Breath Hackathon curren
 at Technion in Haifa, Imperial College in London and MIT in Cambridge. Here we will address
 any issues that were brought to attention or additional examples that were requested.
 
+Last minute information
+-----------------------
+
+There's an important note on sync_example.py: the current version expects both the SFM3000 and SDP6xx sensors to be connected. If you're only interested in one or the other, please adjust line 27 like this:
+
+For the SFM3000 (gas flow sensor), use
+
+    sensors = find_sensors_by_type('sfm3000') + find_sensors_by_type('sht3x')
+    
+For the SDP6xx (differential pressure sensor), use
+
+    sensors = find_sensors_by_type('sdp600') + find_sensors_by_type('sht3x')
+
+
 Contact / Support
 -----------------
 
